@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>crossover investor · AI infrastructure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F4EF;
+    --ink: #1A1814;
+    --ink-light: #6B6560;
+    --accent: #C8442A;
+    --accent2: #2A5FC8;
+    --accent3: #2A8C4A;
+    --rule: #D4CFC8;
+    --card-bg: #EFEBE4;
+    --wave1: #C8442A;
+    --wave2: #2A5FC8;
+    --wave3: #2A8C4A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    font-size: 17px;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+  }
+
+  .nav-links a:hover { color: var(--accent); transition: color 0.2s; }
+
+  /* ── HERO ── */
+  .hero {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 96px 48px 80px;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 80px;
+    align-items: start;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 5vw, 62px);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    margin-bottom: 28px;
+  }
+
+  h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink-light);
+  }
+
+  .hero-bio {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #2C2A27;
+    margin-bottom: 36px;
+    max-width: 560px;
+  }
+
+  .hero-bio strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--accent); }
+
+  .btn-ghost {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .btn-ghost:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* ── HERO RIGHT PANEL ── */
+  .hero-right {
+    padding-top: 8px;
+  }
+
+  .stack-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 20px;
+  }
+
+  .stack-layers {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .stack-layer {
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stack-layer::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+  }
+
+  .stack-layer.l1 { background: rgba(200,68,42,0.06); }
+  .stack-layer.l1::before { background: var(--wave1); }
+
+  .stack-layer.l2 { background: rgba(42,95,200,0.06); }
+  .stack-layer.l2::before { background: var(--wave2); }
+
+  .stack-layer.l3 { background: rgba(42,140,74,0.06); }
+  .stack-layer.l3::before { background: var(--wave3); }
+
+  .stack-layer.l4 { background: rgba(107,101,96,0.06); }
+  .stack-layer.l4::before { background: var(--ink-light); }
+
+  .stack-layer.l5 { background: rgba(107,101,96,0.04); }
+  .stack-layer.l5::before { background: var(--rule); }
+
+  .layer-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+
+  .layer-examples {
+    font-size: 11px;
+    color: var(--ink-light);
+    text-align: right;
+  }
+
+  .focus-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    background: var(--accent);
+    color: white;
+    margin-left: 8px;
+  }
+
+  /* ── SECTION SHARED ── */
+  .section-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 72px 48px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .section-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── EDGE / BACKGROUND ── */
+  .edge-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--rule);
+    margin-top: 36px;
+  }
+
+  .edge-card {
+    background: var(--bg);
+    padding: 32px 28px;
+  }
+
+  .edge-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+
+  .edge-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .edge-desc {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.7;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 32px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+
+  .timeline-item:last-child { border-bottom: none; }
+
+  .tl-year {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-light);
+    padding-top: 4px;
+  }
+
+  .tl-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .tl-company {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+
+  .tl-desc {
+    font-size: 14px;
+    color: var(--ink-light);
+    line-height: 1.65;
+  }
+
+  /* ── ESSAYS ── */
+  .essays-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--rule);
+    margin-top: 36px;
+  }
+
+  .essay-card {
+    background: var(--bg);
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 260px;
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+
+  .essay-card:hover { background: var(--card-bg); }
+
+  .essay-card.featured {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 40px;
+    align-items: center;
+    min-height: auto;
+    padding: 40px 36px;
+  }
+
+  .essay-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 16px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .essay-tag {
+    padding: 2px 8px;
+    border: 1px solid var(--rule);
+    color: var(--ink-light);
+  }
+
+  .essay-tag.new {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .essay-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+
+  .essay-card.featured .essay-title {
+    font-size: 26px;
+  }
+
+  .essay-excerpt {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .essay-read {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .essay-read::after {
+    content: '→';
+    transition: transform 0.2s;
+  }
+
+  .essay-card:hover .essay-read::after { transform: translateX(4px); }
+
+  .essay-wave-indicator {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-end;
+  }
+
+  .wave-dot {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border: 1px solid;
+  }
+
+  .wave-dot.w1 { color: var(--wave1); border-color: var(--wave1); }
+  .wave-dot.w2 { color: var(--wave2); border-color: var(--wave2); }
+  .wave-dot.w3 { color: var(--wave3); border-color: var(--wave3); }
+
+  /* ── WRITING FOCUS ── */
+  .focus-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--rule);
+    margin-top: 36px;
+  }
+
+  .focus-item {
+    background: var(--bg);
+    padding: 24px 22px;
+  }
+
+  .focus-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-bottom: 14px;
+  }
+
+  .focus-item:nth-child(1) .focus-dot { background: var(--wave1); }
+  .focus-item:nth-child(2) .focus-dot { background: var(--wave2); }
+  .focus-item:nth-child(3) .focus-dot { background: var(--wave3); }
+  .focus-item:nth-child(4) .focus-dot { background: var(--ink-light); }
+  .focus-item:nth-child(5) .focus-dot { background: var(--ink-light); }
+  .focus-item:nth-child(6) .focus-dot { background: var(--ink-light); }
+
+  .focus-topic {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .focus-sub {
+    font-size: 12px;
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+
+  /* ── CONNECT ── */
+  .connect-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 36px;
+    align-items: start;
+  }
+
+  .connect-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--ink-light);
+  }
+
+  .connect-links {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .connect-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+    background: var(--card-bg);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+  }
+
+  .connect-link:hover { background: var(--rule); }
+
+  .connect-link span { color: var(--ink-light); }
+  .connect-link .arrow { color: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--ink-light);
+    text-transform: uppercase;
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .fade-in:nth-child(2) { transition-delay: 0.1s; }
+  .fade-in:nth-child(3) { transition-delay: 0.2s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 56px 24px 48px; gap: 48px; }
+    .hero-right { display: none; }
+    .section-wrap { padding: 48px 24px; }
+    .edge-grid, .focus-list { grid-template-columns: 1fr; }
+    .essays-grid { grid-template-columns: 1fr; }
+    .essay-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+    .essay-wave-indicator { display: none; }
+    .connect-grid { grid-template-columns: 1fr; }
+    .timeline-item { grid-template-columns: 1fr; gap: 8px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Christina Xu</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#writing">Writing</a>
+    <a href="#speaking">Speaking</a>
+    <a href="#connect">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="about">
+  <div class="hero-left fade-in">
+    <div class="hero-eyebrow">Crossover Investor</div>
+    <h1>At the intersection of<br><em>AI infrastructure</em><br>and frontier capital.</h1>
+    <p class="hero-bio">
+      I invest in AI infrastructure. <strong>My edge is having operated inside three layers of the stack before I started.</strong>
+    </p>
+    <p class="hero-bio">
+      Before my current role, I co-founded an AI company backed by <strong>Sequoia-SourceCode Capital</strong>, served as acting CFO of an energy-backed AI infrastructure company developing power assets in Texas, and built <strong>HP's Asia e-commerce division</strong> from scratch to $200M in revenue.
+    </p>
+    <div class="hero-cta">
+      <a href="#essays" class="btn-primary">Read the Essays</a>
+      <a href="#connect" class="btn-ghost">Get in touch →</a>
+    </div>
+  </div>
+
+  <div class="hero-right fade-in">
+    <div class="stack-label">Coverage · AI Infrastructure Stack</div>
+    <div class="stack-layers">
+      <div class="stack-layer l1">
+        <span class="layer-name">Physical Layer</span>
+        <span class="layer-examples">Power · Silicon · Packaging <span class="focus-badge">Focus</span></span>
+      </div>
+      <div class="stack-layer l1">
+        <span class="layer-name">Semiconductor</span>
+        <span class="layer-examples">GPU · ASIC · HBM</span>
+      </div>
+      <div class="stack-layer l2">
+        <span class="layer-name">Neocloud / Infra</span>
+        <span class="layer-examples">CoreWeave · Lambda <span class="focus-badge" style="background:var(--wave2)">Focus</span></span>
+      </div>
+      <div class="stack-layer l2">
+        <span class="layer-name">Inference Serving</span>
+        <span class="layer-examples">Baseten · Together <span class="focus-badge" style="background:var(--wave2)">Focus</span></span>
+      </div>
+      <div class="stack-layer l3">
+        <span class="layer-name">Foundation Models</span>
+        <span class="layer-examples">OpenAI · Anthropic</span>
+      </div>
+      <div class="stack-layer l4">
+        <span class="layer-name">Applications</span>
+        <span class="layer-examples">Vertical AI · Agents</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EDGE -->
+<div class="section-wrap fade-in" id="edge">
+  <div class="section-header">Investment Edge</div>
+  <h2>Signals others don't see</h2>
+
+  <div class="edge-grid">
+    <div class="edge-card">
+      <div class="edge-num">Edge 01</div>
+      <div class="edge-title">Private compute economics</div>
+      <p class="edge-desc">Access to unit economics from private infrastructure companies — GPU utilization rates, inference margins, and capex payback periods that never appear in public filings.</p>
+    </div>
+    <div class="edge-card">
+      <div class="edge-num">Edge 02</div>
+      <div class="edge-title">Asian supply chain dynamics</div>
+      <p class="edge-desc">On-the-ground visibility into advanced packaging, memory, and optical component supply chains across Taiwan, Japan, and South Korea — the bottlenecks that determine the pace of AI infrastructure buildout.</p>
+    </div>
+    <div class="edge-card">
+      <div class="edge-num">Edge 03</div>
+      <div class="edge-title">Operator perspective</div>
+      <p class="edge-desc">Having developed power assets for AI infrastructure in Texas and co-founded an AI company, I understand infrastructure economics from the inside — not just the balance sheet.</p>
+    </div>
+  </div>
+</div>
+
+<!-- WRITING -->
+<div class="section-wrap fade-in" id="writing">
+  <div class="section-header">Writing</div>
+  <h2>On AI infrastructure economics</h2>
+
+  <div class="essays-grid">
+    <!-- Featured -->
+    <a href="ai_wealth_waves_1.html" class="essay-card featured">
+      <div>
+        <div class="essay-meta">
+          <span>Essay № 001</span>
+          <span class="essay-tag new">New</span>
+          <span>12 min read</span>
+        </div>
+        <div class="essay-title">Where Is the Next Wave of AI Wealth?</div>
+        <p class="essay-excerpt">A 100-year pattern has governed every major information industry — telegraph, telephone, mobile data. Each time, wealth flows in three waves: infrastructure first, then compression, then gatekeepers. AI is running the same script. The question is which wave you're positioned for.</p>
+        <div class="essay-read">Read the essay</div>
+      </div>
+      <div class="essay-wave-indicator">
+        <span class="wave-dot w1">Wave 1</span>
+        <span class="wave-dot w2">Wave 2</span>
+        <span class="wave-dot w3">Wave 3</span>
+      </div>
+    </a>
+
+    <!-- Essay 002 -->
+    <a href="value_frameworks.html" class="essay-card">
+      <div>
+        <div class="essay-meta">
+          <span>Essay № 002</span>
+          <span class="essay-tag new">New</span>
+          <span>8 min read</span>
+        </div>
+        <div class="essay-title">Why Traditional Value Frameworks Missed the AI Bottleneck Supercycle</div>
+        <p class="essay-excerpt">2025 was a great year for performance. It was also the year I realized how much I had still missed — and why the framework shift AI forces on investors is more uncomfortable than most will admit.</p>
+        <div class="essay-read">Read the essay</div>
+      </div>
+    </a>
+
+    <!-- Coming soon -->
+    <div class="essay-card" style="opacity:0.45; cursor:default;">
+      <div>
+        <div class="essay-meta">
+          <span>Essay № 003</span>
+          <span class="essay-tag">Coming soon</span>
+        </div>
+        <div class="essay-title">The Six-Layer AI Infrastructure Stack</div>
+        <p class="essay-excerpt">A framework for understanding where value accrues across the AI compute chain — from power and silicon through inference serving and model APIs.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SPEAKING -->
+<div class="section-wrap fade-in" id="speaking">
+  <div class="section-header">Speaking</div>
+  <h2>Selected talks</h2>
+
+  <div class="timeline" style="margin-top:32px;">
+    <div class="timeline-item">
+      <div class="tl-year">2025<br><span style="font-size:10px; opacity:0.6;">Placeholder</span></div>
+      <div>
+        <div class="tl-role">Add your talk title here</div>
+        <div class="tl-company">Conference / Event Name · City</div>
+        <div class="tl-desc">One sentence on what you covered — the thesis, the audience, the context.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-year">2025<br><span style="font-size:10px; opacity:0.6;">Placeholder</span></div>
+      <div>
+        <div class="tl-role">Add your talk title here</div>
+        <div class="tl-company">Conference / Event Name · City</div>
+        <div class="tl-desc">One sentence on what you covered — the thesis, the audience, the context.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-year">2024<br><span style="font-size:10px; opacity:0.6;">Placeholder</span></div>
+      <div>
+        <div class="tl-role">Add your talk title here</div>
+        <div class="tl-company">Conference / Event Name · City</div>
+        <div class="tl-desc">One sentence on what you covered — the thesis, the audience, the context.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:32px; padding:20px 24px; background:var(--card-bg); font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-light); letter-spacing:0.08em;">
+    Available for panels, keynotes, and roundtables on AI infrastructure economics and crossover investing. →
+    <a href="#connect" style="color:var(--accent); margin-left:8px;">Get in touch</a>
+  </div>
+</div>
+
+<!-- WRITING FOCUS -->
+<div class="section-wrap fade-in">
+  <div class="section-header">Topics</div>
+  <h2>What I write about</h2>
+
+  <div class="focus-list">
+    <div class="focus-item">
+      <div class="focus-dot"></div>
+      <div class="focus-topic">AI Infrastructure Economics</div>
+      <div class="focus-sub">Capital flows, margin structures, and unit economics across the compute stack</div>
+    </div>
+    <div class="focus-item">
+      <div class="focus-dot"></div>
+      <div class="focus-topic">Supply Chain Dynamics</div>
+      <div class="focus-sub">Advanced packaging, memory, optical — the physical constraints on AI scaling</div>
+    </div>
+    <div class="focus-item">
+      <div class="focus-dot"></div>
+      <div class="focus-topic">Historical Patterns</div>
+      <div class="focus-sub">What telegraph, telephone, and mobile data cycles tell us about where AI wealth concentrates</div>
+    </div>
+    <div class="focus-item">
+      <div class="focus-dot"></div>
+      <div class="focus-topic">Private Market Signals</div>
+      <div class="focus-sub">Reading neocloud and inference company economics before they reach public markets</div>
+    </div>
+    <div class="focus-item">
+      <div class="focus-dot"></div>
+      <div class="focus-topic">Power & Physical Layer</div>
+      <div class="focus-sub">Energy infrastructure, data center development, and the atoms behind the bits</div>
+    </div>
+    <div class="focus-item">
+      <div class="focus-dot"></div>
+      <div class="focus-topic">Crossover Investing</div>
+      <div class="focus-sub">How public and private market signals interact across the AI infrastructure cycle</div>
+    </div>
+  </div>
+</div>
+
+<!-- BACKGROUND -->
+<div class="section-wrap fade-in" id="background">
+  <div class="section-header">Background</div>
+  <h2>Operator before investor</h2>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="tl-year">Current</div>
+      <div>
+        <div class="tl-role">Crossover Investor</div>
+        <div class="tl-company">AI Infrastructure · Full Stack</div>
+        <div class="tl-desc">Focused on the full AI infrastructure stack from physical layer through foundation models. Coverage spans public equities, private credit, and venture — with emphasis on the supply chain and infrastructure layers where private signals lead public markets by 6–12 months.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-year">Prior</div>
+      <div>
+        <div class="tl-role">Acting CFO</div>
+        <div class="tl-company">Energy-Backed AI Infrastructure Company · Texas</div>
+        <div class="tl-desc">Oversaw finance and strategy for a company developing power assets specifically for AI data center infrastructure in Texas. Hands-on exposure to the physical constraints, permitting dynamics, and capital structures of AI infrastructure development.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-year">Prior</div>
+      <div>
+        <div class="tl-role">Co-Founder</div>
+        <div class="tl-company">AI Healthcare Company · Sequoia-SourceCode Capital</div>
+        <div class="tl-desc">Co-founded an AI healthcare company backed by Sequoia-SourceCode Capital. Built the company from zero to product, navigating model selection, inference cost optimization, and enterprise go-to-market — giving a ground-level view of AI application unit economics.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-year">Prior</div>
+      <div>
+        <div class="tl-role">Division Head, Asia E-Commerce</div>
+        <div class="tl-company">HP · Asia Pacific</div>
+        <div class="tl-desc">Built HP's Asia e-commerce division from zero to $200M in revenue. Developed a deep understanding of Asian manufacturing and supply chain dynamics that now informs investment analysis of semiconductor and hardware supply chains.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONNECT -->
+<div class="section-wrap fade-in" id="connect">
+  <div class="section-header">Connect</div>
+
+  <div class="connect-grid">
+    <div class="connect-text">
+      "I'm most interested in conversations with founders building in AI infrastructure, operators with supply chain visibility, and investors thinking about the crossover between public and private markets."
+    </div>
+    <div class="connect-links">
+      <a href="mailto:" class="connect-link">
+        Email <span class="arrow">→</span>
+      </a>
+      <a href="https://linkedin.com" target="_blank" class="connect-link">
+        LinkedIn <span class="arrow">→</span>
+      </a>
+      <a href="https://twitter.com" target="_blank" class="connect-link">
+        X / Twitter <span class="arrow">→</span>
+      </a>
+      <a href="https://substack.com" target="_blank" class="connect-link">
+        Substack <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>AI Infrastructure · Crossover Investing</span>
+  <span>Essays on where wealth concentrates</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) el.target.classList.add('visible');
+    });
+  }, { threshold: 0.06 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

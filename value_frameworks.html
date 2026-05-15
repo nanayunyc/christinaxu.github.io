@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Traditional Value Frameworks Missed the AI Bottleneck Supercycle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F4EF;
+    --ink: #1A1814;
+    --ink-light: #6B6560;
+    --accent: #C8442A;
+    --accent2: #2A5FC8;
+    --accent3: #2A8C4A;
+    --rule: #D4CFC8;
+    --card-bg: #EFEBE4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', sans-serif; font-weight: 300; line-height: 1.75; font-size: 17px; }
+  a { color: inherit; text-decoration: none; }
+
+  nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--rule); padding: 0 48px; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 400; color: var(--ink); }
+  .nav-links { display: flex; gap: 32px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-light); }
+  .nav-links a:hover { color: var(--accent); transition: color 0.2s; }
+
+  .hero { max-width: 820px; margin: 0 auto; padding: 80px 48px 56px; border-bottom: 1px solid var(--rule); }
+  .hero-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px, 4.5vw, 52px); font-weight: 900; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 24px; }
+  .hero-sub { font-family: 'Playfair Display', serif; font-style: italic; font-size: 20px; color: var(--ink-light); margin-bottom: 32px; line-height: 1.5; }
+  .hero-meta { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-light); letter-spacing: 0.08em; display: flex; gap: 32px; }
+
+  .content { max-width: 820px; margin: 0 auto; padding: 0 48px; }
+  section { padding: 52px 0; border-bottom: 1px solid var(--rule); }
+  section:last-child { border-bottom: none; }
+
+  .section-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 28px; display: flex; align-items: center; gap: 12px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+  h2 { font-family: 'Playfair Display', serif; font-size: clamp(24px, 3vw, 30px); font-weight: 700; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.01em; }
+  p { margin-bottom: 20px; color: #2C2A27; }
+  strong { font-weight: 500; color: var(--ink); }
+  em { font-style: italic; }
+
+  .pullquote { border-left: 3px solid var(--accent); padding: 4px 0 4px 28px; margin: 36px 0; }
+  .pullquote p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 21px; line-height: 1.5; color: var(--ink); margin: 0; }
+
+  .insight-box { background: var(--card-bg); padding: 28px 32px; margin: 32px 0; border-left: 3px solid var(--accent2); }
+  .insight-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent2); margin-bottom: 12px; }
+  .insight-box p { font-size: 15px; line-height: 1.7; margin: 0; color: var(--ink); }
+
+  .perf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--rule); margin: 32px 0; }
+  .perf-card { background: var(--bg); padding: 24px 20px; }
+  .perf-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 10px; }
+  .perf-result { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .perf-result.positive { color: var(--accent3); }
+  .perf-result.negative { color: var(--accent); }
+  .perf-desc { font-size: 12px; color: var(--ink-light); line-height: 1.5; }
+
+  .framework-shift { background: var(--card-bg); padding: 36px; margin: 32px 0; }
+  .shift-title { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 28px; }
+  .shift-row { display: grid; grid-template-columns: 1fr 40px 1fr; gap: 16px; align-items: center; margin-bottom: 16px; }
+  .shift-row:last-child { margin-bottom: 0; }
+  .shift-old { padding: 14px 16px; background: rgba(107,101,96,0.1); font-size: 13px; color: var(--ink-light); line-height: 1.5; }
+  .shift-arrow { text-align: center; color: var(--accent); font-size: 18px; }
+  .shift-new { padding: 14px 16px; background: rgba(42,95,200,0.08); border-left: 2px solid var(--accent2); font-size: 13px; color: var(--ink); line-height: 1.5; }
+  .shift-label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 6px; }
+
+  .back-nav { display: flex; gap: 32px; align-items: center; padding: 32px 48px; max-width: 820px; margin: 0 auto; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; border-top: 1px solid var(--rule); }
+  .back-nav a { color: var(--ink-light); transition: color 0.2s; }
+  .back-nav a:hover { color: var(--accent); }
+
+  .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 640px) {
+    nav, .content, .hero, .back-nav { padding-left: 24px; padding-right: 24px; }
+    .perf-grid { grid-template-columns: 1fr; }
+    .shift-row { grid-template-columns: 1fr; }
+    .shift-arrow { display: none; }
+    .hero-meta { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Christina Xu</a>
+  <div class="nav-links">
+    <a href="index.html#about">About</a>
+    <a href="index.html#writing">Writing</a>
+    <a href="index.html#speaking">Speaking</a>
+    <a href="index.html#connect">Contact</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">Essay № 002</div>
+  <h1>Why Traditional Value Frameworks Missed the AI Bottleneck Supercycle</h1>
+  <p class="hero-sub">On outperforming the index — and still missing the bigger lesson.</p>
+  <div class="hero-meta">
+    <span>~1,800 words</span>
+    <span>8 min read</span>
+    <span>2025</span>
+  </div>
+</div>
+
+<div class="content">
+
+  <section class="fade-in">
+    <div class="section-label">The Setup</div>
+    <p>2025 was a great year for me in terms of investment performance: continued bets on neocloud, gas turbines, and HBM through pure supply-demand analysis and physical constraints; a deep understanding of how data centers are actually built that led to several successful shorts, including one stock that dropped nearly 50% within two weeks; a strong short in SaaS after Dario mentioned they wanted to internalize more capabilities.</p>
+    <p>On paper, the results looked great. The portfolio significantly outperformed the index and likely outperformed more than 90% of funds that year. But in reality, 2025 was also the year I realized how much I had still missed.</p>
+
+    <div class="perf-grid">
+      <div class="perf-card">
+        <div class="perf-label">Neocloud + Gas + HBM</div>
+        <div class="perf-result positive">Long ✓</div>
+        <div class="perf-desc">Supply-demand analysis and physical constraint mapping</div>
+      </div>
+      <div class="perf-card">
+        <div class="perf-label">Data center short</div>
+        <div class="perf-result negative">−50%</div>
+        <div class="perf-desc">Target dropped ~50% within two weeks of the position</div>
+      </div>
+      <div class="perf-card">
+        <div class="perf-label">SaaS short</div>
+        <div class="perf-result positive">Short ✓</div>
+        <div class="perf-desc">After Dario signaled intent to internalize more capabilities</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fade-in">
+    <div class="section-label">The 10x Fund</div>
+    <h2>The number I couldn't ignore</h2>
+    <p>10x return. That's the number one of my friends' funds did this year. No leverage, concentrated in around 10 names, slightly hedged.</p>
+    <p>Normally, as a well-trained Wall Street type investor, the instinct is always: what's the risk-adjusted return? What's the hedge? What multiple am I paying? How much downside is protected? That framework worked very well for a long time. If you caught Nvidia in 2023, energy and power in 2024, then HBM and storage in 2025, you already generated incredible returns.</p>
+
+    <div class="pullquote">
+      <p>Sometimes sophisticated investing becomes a psychological shield. You hide behind valuation discipline because it sounds intellectually rigorous — while the industry is changing faster than your framework allows.</p>
+    </div>
+  </section>
+
+  <section class="fade-in">
+    <div class="section-label">The Buffett Analogy</div>
+    <h2>When the framework itself needs to evolve</h2>
+    <p>Buffett was probably the person who influenced my investment thinking the most. Early Buffett was much closer to a pure Benjamin Graham-style "cigar butt" investor: buy statistically cheap companies, low P/B, low PE, buy $1 for 50 cents.</p>
+    <p>But eventually he realized something important: cheap businesses are often cheap for a reason. Terrible businesses consume capital. Weak businesses never compound. Then came the famous shift:</p>
+
+    <div class="pullquote">
+      <p>"It is better to buy a wonderful business at a fair price than a fair business at a wonderful price."</p>
+    </div>
+
+    <p>I think something similar is happening right now in AI infrastructure. The framework is shifting — and investors still using old lenses are going to keep missing it.</p>
+  </section>
+
+  <section class="fade-in">
+    <div class="section-label">Bottleneck Analysis</div>
+    <h2>Early on the scarcity. Late on the meaning.</h2>
+    <p>For years, my alpha came from identifying where the real bottlenecks were forming before consensus fully recognized them. I remember being involved around power generation projects in Texas when Elon bought 70% of small gas generators and we were struggling to secure even one piece of equipment ourselves. The scarcity was physically visible on the ground long before it appeared in financial models — it took another six months before capital finally rotated into names like GE Vernova and Caterpillar.</p>
+    <p>The same pattern repeated in HBM. By the time "memory wall" became a mainstream discussion, bandwidth scarcity had already started reshaping customer behavior.</p>
+
+    <div class="insight-box">
+      <div class="insight-label">The uncomfortable realization</div>
+      <p>Even though I was early on the scarcity itself, I was still mentally categorizing these companies using old economic frameworks. I sold too early. I missed part of the HBM move. Not because I didn't see the demand — but because I still viewed memory through a traditional lens: eventual oversupply, ASP collapse, margin normalization, commodity cycle.</p>
+    </div>
+  </section>
+
+  <section class="fade-in">
+    <div class="section-label">The Core Insight</div>
+    <h2>Price per bit vs. price per bandwidth</h2>
+    <p>Historically, memory was always analyzed through a storage lens: price per bit, commodity cycles, eventual oversupply, margin collapse. The assumption was simple — memory always commoditizes eventually.</p>
+    <p>But AI workloads changed the customer utility function entirely. Customers no longer view memory through a storage lens. They view it through a compute lens. Even as price per bit goes up, price per bandwidth is falling. Customers are getting more compute value per dollar — and once that happens, they become willing not only to pay more, but to pay upfront.</p>
+
+    <div class="framework-shift">
+      <div class="shift-title">The Framework Shift — How customers now evaluate memory</div>
+      <div class="shift-row">
+        <div class="shift-old">
+          <div class="shift-label">Old lens</div>
+          Price per bit · Storage capacity · Commodity cycle · Eventual oversupply
+        </div>
+        <div class="shift-arrow">→</div>
+        <div class="shift-new">
+          <div class="shift-label">New lens</div>
+          Price per bandwidth · Compute throughput · Strategic infrastructure · Long-term contracts
+        </div>
+      </div>
+      <div class="shift-row">
+        <div class="shift-old">
+          <div class="shift-label">Old behavior</div>
+          Spot purchasing · Price sensitive · Substitutable suppliers
+        </div>
+        <div class="shift-arrow">→</div>
+        <div class="shift-new">
+          <div class="shift-label">New behavior</div>
+          3-year price floors · Full-year prepayments · Quarterly resets only to the upside
+        </div>
+      </div>
+      <div class="shift-row">
+        <div class="shift-old">
+          <div class="shift-label">Old conclusion</div>
+          Margin normalization inevitable · Don't overpay
+        </div>
+        <div class="shift-arrow">→</div>
+        <div class="shift-new">
+          <div class="shift-label">New conclusion</div>
+          Micron guiding ~81% gross margin on 2Q26 pricing. That is not commodity behavior.
+        </div>
+      </div>
+    </div>
+
+    <div class="pullquote">
+      <p>AI did not just increase demand. It changed the economic identity of infrastructure components.</p>
+    </div>
+  </section>
+
+  <section class="fade-in">
+    <div class="section-label">The Lesson</div>
+    <h2>Identifying bottlenecks is no longer enough</h2>
+    <p>The biggest lesson I learned in 2025 is that identifying bottlenecks is no longer sufficient. The market eventually recognizes every visible scarcity.</p>
+    <p>The harder question is whether AI changes the <em>economic structure</em> behind that scarcity — and whether investors are still using old frameworks to value a fundamentally new kind of infrastructure.</p>
+    <p>For years, my edge came from identifying physical bottlenecks before consensus fully recognized them. But AI increasingly forces a second layer of analysis: not just <em>where</em> scarcity exists, but <em>how</em> intelligence workloads reshape the economic meaning of the infrastructure itself.</p>
+    <p>That was the framework shift AI forced me to confront in 2025.</p>
+  </section>
+
+</div>
+
+<div class="back-nav">
+  <a href="index.html">← Back to home</a>
+  <a href="ai_wealth_waves_1.html">Read Essay № 001 →</a>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) el.target.classList.add('visible');
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

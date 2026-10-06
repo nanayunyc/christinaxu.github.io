@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>After 15 Silicon Valley AI Companies, I'm Rethinking Open vs. Closed — Christina Xu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F4EF;
+    --ink: #1A1814;
+    --ink-light: #6B6560;
+    --accent: #C8442A;
+    --accent2: #2A5FC8;
+    --accent3: #2A8C4A;
+    --rule: #D4CFC8;
+    --card-bg: #EFEBE4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', sans-serif; font-weight: 300; line-height: 1.75; font-size: 17px; }
+  a { color: inherit; text-decoration: none; }
+
+  nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--rule); padding: 0 48px; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 400; color: var(--ink); }
+  .nav-links { display: flex; gap: 32px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-light); }
+  .nav-links a:hover { color: var(--accent); transition: color 0.2s; }
+
+  .hero { max-width: 820px; margin: 0 auto; padding: 80px 48px 56px; border-bottom: 1px solid var(--rule); }
+  .hero-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px, 4.5vw, 50px); font-weight: 900; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 24px; }
+  .hero-sub { font-family: 'Playfair Display', serif; font-style: italic; font-size: 20px; color: var(--ink-light); margin-bottom: 32px; line-height: 1.5; }
+  .hero-meta { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-light); letter-spacing: 0.08em; display: flex; gap: 32px; flex-wrap: wrap; }
+
+  .content { max-width: 820px; margin: 0 auto; padding: 0 48px; }
+  section { padding: 52px 0; border-bottom: 1px solid var(--rule); }
+  section:last-child { border-bottom: none; }
+
+  .section-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 28px; display: flex; align-items: center; gap: 12px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+  h2 { font-family: 'Playfair Display', serif; font-size: clamp(24px, 3vw, 30px); font-weight: 700; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.01em; }
+  h3 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; margin: 28px 0 12px; letter-spacing: -0.01em; }
+  p { margin-bottom: 20px; color: #2C2A27; }
+  strong { font-weight: 500; color: var(--ink); }
+  em { font-style: italic; }
+
+  .pullquote { border-left: 3px solid var(--accent); padding: 4px 0 4px 28px; margin: 36px 0; }
+  .pullquote p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 21px; line-height: 1.5; color: var(--ink); margin: 0; }
+
+  .conclusions-box { background: var(--card-bg); padding: 32px 36px; margin: 28px 0; border-left: 3px solid var(--accent); }
+  .conclusions-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  .conclusion-row { display: flex; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+  .conclusion-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .conclusion-row:first-child { padding-top: 0; }
+  .conclusion-num { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--accent); font-weight: 500; flex-shrink: 0; min-width: 24px; }
+  .conclusion-text { font-size: 15px; line-height: 1.6; color: var(--ink); }
+  .conclusion-text strong { color: var(--ink); }
+
+  .citation-box { background: var(--card-bg); padding: 28px 32px; margin: 32px 0; border-left: 3px solid var(--accent2); }
+  .citation-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent2); margin-bottom: 12px; }
+  .citation-box p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 18px; line-height: 1.6; margin: 0; color: var(--ink); }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--rule); margin: 32px 0; }
+  .stat-cell { background: var(--bg); padding: 22px 20px; }
+  .stat-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 10px; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; line-height: 1.1; color: var(--ink); margin-bottom: 6px; }
+  .stat-sub { font-size: 12px; color: var(--ink-light); line-height: 1.4; }
+
+  .watch-list { background: var(--card-bg); padding: 32px 36px; margin: 32px 0; }
+  .watch-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 20px; }
+  .watch-row { padding: 16px 0; border-bottom: 1px solid var(--rule); display: flex; gap: 16px; }
+  .watch-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .watch-row:first-child { padding-top: 0; }
+  .watch-num { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: var(--accent); flex-shrink: 0; min-width: 24px; padding-top: 2px; }
+  .watch-text { font-size: 15px; line-height: 1.55; }
+
+  .verdict-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--rule); margin: 32px 0; }
+  .verdict-cell { background: var(--bg); padding: 24px 26px; }
+  .verdict-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 14px; }
+  .verdict-cell.bear .verdict-label { color: var(--accent); }
+  .verdict-cell.bull .verdict-label { color: var(--accent3); }
+  .verdict-point { font-size: 14px; line-height: 1.55; padding: 8px 0; border-top: 1px dashed var(--rule); }
+  .verdict-point:first-of-type { border-top: none; }
+
+  .attr-note { background: var(--card-bg); padding: 20px 24px; margin: 32px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-light); letter-spacing: 0.05em; line-height: 1.65; }
+
+  .back-nav { display: flex; gap: 32px; align-items: center; padding: 32px 48px; max-width: 820px; margin: 0 auto; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; border-top: 1px solid var(--rule); }
+  .back-nav a { color: var(--ink-light); transition: color 0.2s; }
+  .back-nav a:hover { color: var(--accent); }
+
+  .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 640px) {
+    nav, .content, .hero, .back-nav { padding-left: 24px; padding-right: 24px; }
+    .hero-meta { flex-direction: column; gap: 8px; }
+    .stat-grid { grid-template-columns: 1fr; }
+    .verdict-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Christina Xu</a>
+  <div class="nav-links">
+    <a href="index.html#about">About</a>
+    <a href="index.html#investments">Investments</a>
+    <a href="index.html#writing">Writing</a>
+    <a href="index.html#speaking">Speaking</a>
+    <a href="index.html#connect">Contact</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">Essay № 005 · Featured Research</div>
+  <h1>After 15 Silicon Valley AI Companies, I'm Rethinking Open vs. Closed</h1>
+  <p class="hero-sub">From Token Optimization to Model Routing — the biggest shifts of the past month.</p>
+  <div class="hero-meta">
+    <span>~2,500 words</span>
+    <span>12 min read</span>
+    <span>July 2026</span>
+    <span>Field research</span>
+  </div>
+</div>
+
+<div class="content">
+
+  <section class="fade-in">
+    <div class="section-label">Three Conclusions</div>
+
+    <div class="conclusions-box">
+      <div class="conclusions-label">Up front</div>
+      <div class="conclusion-row">
+        <div class="conclusion-num">01</div>
+        <div class="conclusion-text">Silicon Valley's hottest phrase has shifted from <strong>Token Maxing</strong> to <strong>Value Maxing</strong>: for the first time, enterprises are systematically managing AI cost.</div>
+      </div>
+      <div class="conclusion-row">
+        <div class="conclusion-num">02</div>
+        <div class="conclusion-text">Open-source token share is growing faster than most realize: on one top coding-agent platform, from <strong>0.1% to 15% in seven months</strong>. But token share and revenue share are two different things.</div>
+      </div>
+      <div class="conclusion-row">
+        <div class="conclusion-num">03</div>
+        <div class="conclusion-text">A month ago, Gavin Baker offered a framework: <strong>frontier models capture 90% of value, open models carry 80% of tokens</strong>. Against the latest data, the token half is materializing even faster than expected — by early June, Chinese models surpassed US models in token volume on OpenRouter.</div>
+      </div>
+    </div>
+
+    <p>Yesterday, Google reported Q2 earnings — a timely footnote to this piece. Google Cloud revenue grew 82% YoY to $24.8B, with backlog up to $514B. One number worth more attention: Google's first-party model API throughput now runs at <strong>roughly 22 billion tokens per minute</strong>, up from 16 billion last quarter.</p>
+
+    <p>We've been talking about Token Optimization for six months, and total token volume is still accelerating — exactly the real-time demonstration of the Jevons Paradox I'll get to below. But the market's after-hours reaction was down: capex doubled to $44.9B, with the first negative quarterly free cash flow since IPO. No one's questioning growth anymore; the market is starting to price the bill.</p>
+
+    <p>Last week in Menlo Park, I attended a closed-door session with <strong>Cursor, Fireworks, Cognition, Sierra</strong>, and a dozen other AI-native companies over two days. Combined with recent time at Stanford and one-on-one founder conversations circling the same questions, I'm increasingly convinced of one thing:</p>
+
+    <div class="pullquote">
+      <p>AI's competition is shifting from Capability to Economics.</p>
+    </div>
+
+    <p>Two years ago the question was who could train the strongest model. Today, enterprises are asking: <em>which tasks are worth calling the strongest model, and which can be done by cheaper ones?</em></p>
+
+    <p>The two keywords are <strong>Token Optimization</strong> and <strong>Model Routing</strong>. The first means enterprises are, for the first time, systematically managing AI cost. The second means they're no longer relying on a single model, but dynamically allocating traffic across closed, open, and even in-house models based on task.</p>
+
+    <p>The debate in Silicon Valley around open-source models has shifted from "is it smart enough?" to "can it carry more production traffic?" And what that really affects is the revenue growth curves of OpenAI, Anthropic, and the other Frontier Labs over the next few years.</p>
+  </section>
+
+  <section class="fade-in">
+    <div class="section-label">I · Growth</div>
+    <h2>Growth hasn't slowed. The growth logic has.</h2>
+
+    <p>First, a common misread to correct: enterprises optimizing tokens does <em>not</em> mean AI investment is cooling.</p>
+
+    <p>If anything, the opposite. These AI-native companies are still growing at breakneck pace. Three examples make the point:</p>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Fireworks</div>
+        <div class="stat-num">$400M → $1B</div>
+        <div class="stat-sub">ARR this year. Just closed at $17.5B valuation.</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Cognition</div>
+        <div class="stat-num">~$500M</div>
+        <div class="stat-sub">Roughly 7x year over year.</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Higgsfield</div>
+        <div class="stat-num">$0 → $500M</div>
+        <div class="stat-sub">Video generation. 14 months.</div>
+      </div>
+    </div>
+
+    <p>Three reasons for the sustained growth: model capability made a clear step-up in the past six months, and enterprises are finally seeing ROI; products have evolved from Copilots to Agents, meaning each task consumes materially more tokens; and more companies are moving to Subscription + Usage hybrid pricing, where Token Consumption translates directly into revenue.</p>
+
+    <p>AI spending hasn't slowed — it's entered a phase of refined operations. Enterprises are still willing to spend, but no longer willing to pay for low-value tokens.</p>
+  </section>
+
+  <section class="fade-in">
+    <div class="section-label">II · Token Optimization</div>
+    <h2>Every customer conversation is now about cost</h2>
+
+    <p>Token Optimization was the single highest-frequency topic across the two days. Cursor's exact words: <em>"Now every customer conversation is about this."</em></p>
+
+    <p>Enterprises are redesigning workflows — analyzing which tasks truly need the strongest model, and which can be downshifted to cheaper ones.</p>
+
+    <p>But not everyone is braking. <strong>ClickHouse</strong> is a counterexample worth noting: they paid Claude $20K/month in January, $1M/month in June — a <strong>50x increase</strong>, now about 5% of their own revenue. Even so, they're still encouraging employees to use it liberally and expect it to hit 10%, because they believe the productivity lift from AI far exceeds that cost.</p>
+
+    <p>Across the room, though, ClickHouse is a minority. Most enterprises are already installing brakes. One company tied the start of this optimization wave to software vendors collectively moving to token-based billing — Microsoft moved GitHub Copilot to per-token pricing on June 1, for example. <strong>The moment cost became visible, control began.</strong></p>
+
+    <p>This reminds me of Cloud Optimization in 2022–2024. Enterprises didn't abandon cloud; they just optimized resource utilization. But worth remembering: the bulls back then also said "they'll spend more once optimization is done" — the result was four consecutive quarters of decelerating growth at AWS, Snowflake, and Datadog. Today the optimization target has shifted from cloud resources to tokens. Whether the script repeats is one of the most important questions of the second half.</p>
+  </section>
+
+  <section class="fade-in">
+    <div class="section-label">III · Model Routing</div>
+    <h2>Enterprises buy systems, not models</h2>
+
+    <p>If Token Optimization is the goal, Model Routing is the method.</p>
+
+    <p>We've long past the "give the user a model dropdown" stage. Cognition can now split a single inference task into multiple sub-tasks, routing to different models based on cost, reasoning ability, latency, and accuracy. The user doesn't even need to know which was called.</p>
+
+    <p>What enterprises actually buy is no longer a specific model, but a system that intelligently orchestrates multiple models.</p>
+
+    <div class="pullquote">
+      <p>Last year's question: Who builds the best model? This year's question: Who routes to the best model?</p>
+    </div>
+
+    <p>How fast is this migration happening? Two data points:</p>
+
+    <ul style="margin: 0 0 20px 24px;">
+      <li style="margin-bottom: 12px;">Customer-service AI company <strong>Decagon</strong> says 30% of token requests already route to open-source models.</li>
+      <li style="margin-bottom: 12px;">On <strong>Factory</strong>, open-source token share was 0.1% last December, 1% in February, now 10–15% — <strong>up more than 100x in seven months</strong>. Their founder even thinks it could hit 90% in 12 months.</li>
+    </ul>
+
+    <p>I'd push back on 90%, but the direction and slope are clear. And worth noting: routing to open models isn't just about saving money — several companies cited another motive: <em>not wanting to be locked into any one model vendor.</em></p>
+  </section>
+
+  <section class="fade-in">
+    <div class="section-label">IV · The Dumbbell</div>
+    <h2>Great or Cheap. The middle gets squeezed.</h2>
+
+    <p>My read on the model landscape after these conversations compresses to one word: <strong>dumbbell</strong>.</p>
+
+    <div class="pullquote">
+      <p>The model market will ultimately form a dumbbell structure. Either Great, or Cheap. The middle will get increasingly hard to survive.</p>
+    </div>
+
+    <p>Both ends will see consolidation. On the cheap end, new faces keep appearing — <strong>Kimi K3, GLM 5.2, Qwen</strong> taking turns in the spotlight — but the one holding the floor price is still <strong>DeepSeek</strong>: it remains the single largest model supplier on OpenRouter by share, larger than any US provider. One investor called it the <em>"price-performance floor"</em> of the market.</p>
+
+    <p>DeepSeek has set the price-performance floor for the entire market: any model more expensive than it must be meaningfully better, or users will just retry on DeepSeek. A model that only matches or slightly outperforms will struggle to survive.</p>
+
+    <p>The real question for the strong end: will cheap models cross the <em>"good enough"</em> line?</p>
+
+    <p>The risk: once cheap models are good enough, most users will be satisfied, and Frontier Labs' premium collapses.</p>
+
+    <p>I disagree with this read. I believe the demand for frontier intelligence will never be fully satisfied — every time model capability steps up, it unlocks a batch of tasks that couldn't be done before. Both ends of the dumbbell will have durable demand.</p>
+
+    <div class="citation-box">
+      <div class="citation-label">External · Gavin Baker Framework</div>
+      <p>"Frontier captures 90% of value. Open-source carries 80% of tokens."</p>
+    </div>
+
+    <p>A month ago, Gavin Baker offered that framework. At the time, I wondered if the call would date quickly — Kimi K3 and DeepSeek V4 both came after. Checked against the latest data: <strong>the token half materialized even faster than he said. The value half still stands.</strong></p>
+
+    <p>OpenRouter data shows Chinese model token volume officially surpassed US models in early June; by mid-July, Asian models were about <strong>60% of platform tokens</strong>, tripling their share since the start of the year.</p>
+
+    <p>Zoom out a year, it's even more striking: Google, OpenAI, and Anthropic's combined token share dropped from ~70% in June last year to ~30% in June this year. DeepSeek alone is now over 16%, the single largest provider on the platform — V4's share doubled within six months of release, with agentic workloads the main driver.</p>
+
+    <p>But the other half of the framework also holds: <strong>Anthropic has only ~12–13% of tokens, yet revenue capture far exceeds its usage share</strong> — in coding-related spend, Claude has consistently taken 60%+. The market is splitting into two lanes: commodity lane for volume, premium lane for revenue.</p>
+
+    <p>Caveat: OpenRouter's sample skews toward developers and price-sensitive traffic, so it doesn't fully represent the enterprise market. But as a directional indicator, it's clear enough.</p>
+
+    <p>A concrete example is <strong>Harvey</strong>. I spoke with their tech lead last week. They used their proprietary legal data, partnered with a third party to post-train on an open model, then put a router in front — the result outperformed Opus 4.8 directly, at lower cost. This may be what the future looks like: frontier models continue heavy use, but more and more tokens flow to task-specific open models.</p>
+  </section>
+
+  <section class="fade-in">
+    <div class="section-label">V · Fully Loaded Cost</div>
+    <h2>List prices are losing meaning</h2>
+
+    <p>Another shift worth watching: list prices between models (input/output token price) are becoming less and less meaningful as reference points. What enterprises actually care about is not the price per million tokens, but <strong>the total cost of completing the same task.</strong></p>
+
+    <p>Cache hit rate, inference stability, retry count, token efficiency — all affect final cost. Sometimes a model that looks 4x cheaper, if it has a 60% first-pass success rate and averages 1.7 runs, plus retry cache, ends up less than 2x cheaper in practice. In real production environments, the savings may be far smaller than they look.</p>
+
+    <p>Front-line feedback in Silicon Valley confirms this. A cheap model with low first-pass success rate, needing 2–3 retries, quickly eats up the token price gap; the cache tokens from retries then eat into the on-paper cost advantage. DeepSeek keeps the floor lowest via extreme price; but what frontline users complain about most is exactly output stability — the same task producing inconsistent results across runs. A cheaper but more frequently failing model may not actually be cheaper in production.</p>
+
+    <div class="pullquote">
+      <p>What should really be compared isn't the list price per million tokens, but fully loaded cost per successful task.</p>
+    </div>
+
+    <p>Similar arithmetic applies to the cloud-vs-local debate. Someone on Twitter did the math seriously: GLM 5.2's API prices at $1.40 input / $4.40 output per million tokens; if you buy hardware to run it locally, the entry cost is ~$20K, output around 20 tok/s — <strong>even running 24/7 all year, breakeven takes 5.5 years.</strong> With compute scarcity and hardware iterating this fast, the math only tilts further toward cloud.</p>
+
+    <p>Finally, availability — an underrated constraint. Models like GLM are currently chip-constrained, served mainly through inference platforms like Together and Fireworks, not yet broadly on major public clouds (though AWS and Azure have started listing some Chinese models). Kimi even had to pause new user signups at one point due to compute shortage. The threat from Chinese models is worth tracking, but putting heavy bets now is premature.</p>
+
+    <p>Two questions I'll be tracking from here:</p>
+
+    <ol style="margin: 0 0 20px 24px;">
+      <li style="margin-bottom: 10px;">When can Chinese models achieve large-scale, stable supply on public clouds?</li>
+      <li style="margin-bottom: 10px;">Is the gap with OpenAI and Anthropic converging, or stabilizing?</li>
+    </ol>
+
+    <p>The answers to these determine real impact — not Twitter sentiment.</p>
+  </section>
+
+  <section class="fade-in">
+    <div class="section-label">VI · Investment Implications</div>
+    <h2>What this means across the stack</h2>
+
+    <h3>Frontier Labs</h3>
+    <p>What really needs rethinking isn't whether OpenAI and Anthropic will be replaced by open-source — it's whether the market needs to re-estimate their ARR growth assumptions. One blunt call: <strong>part of Anthropic's H1 growth came from "using the most expensive model to do grunt work"</strong> — running non-frontier tasks on Opus-tier models.</p>
+    <p>In H2, those tasks either get cut by Token Optimization or routed to cheaper models. Expensive models still carry the highest-value tasks, but revenue growth will depend more on high-value inference than on synchronous token expansion across all workloads.</p>
+
+    <h3>Semiconductors</h3>
+    <p>I'm actually more bullish here. People worrying that Token Optimization will suppress GPU demand are missing the <strong>Jevons Paradox</strong>: lower unit cost has never reduced total consumption — it only expands total demand. Tech has worked this way all along. Cheaper models push AI from early adopters to mainstream. And don't forget: China is compute-constrained — these open models ultimately need to be hosted where compute is abundant.</p>
+    <p>The industry's center of gravity will gradually shift from Training to Inference, but GPU, HBM, high-speed networking, and advanced packaging remain the highest-conviction directions in the whole AI infrastructure stack. One detail: giant open models like Kimi K3 only fit in the highest-HBM-density racks — <em>the bigger open models get, the happier memory vendors are.</em></p>
+
+    <h3>Cloud Infrastructure</h3>
+    <p>Cloud providers in the future won't just compete on how many GPUs they have, but on <strong>who can help customers complete inference at lower cost</strong>. Inference efficiency, model deployment capability, scheduling, and TCO become more and more important. Deploying Chinese models actually <em>increases</em>, not decreases, cloud compute demand — a point even Databricks has publicly confirmed.</p>
+
+    <h3>AI Software</h3>
+    <p>The biggest opportunity is shifting from the model layer to the application and orchestration layers. As models commoditize, platforms that help enterprises auto-select models, optimize cost, and lift ROI — Routing, Inference Infra, Agent orchestration — see rising value.</p>
+    <p>This is why Fireworks and similar companies deserve more attention: what they compete on isn't the model, but <strong>the efficiency of an enterprise's AI system</strong>. The risk is equally clear: if Frontier Labs, facing a more competitive model market, choose to accelerate vertical integration into the software layer, Infra software has a harder time. (More on the Infra software competition and opportunities in a longer piece coming.)</p>
+  </section>
+
+  <section class="fade-in">
+    <div class="section-label">Closing</div>
+    <h2>Four things to watch over the next two quarters</h2>
+
+    <div class="verdict-grid">
+      <div class="verdict-cell bear">
+        <div class="verdict-label">Bear case · Two points</div>
+        <div class="verdict-point">Cheap models cross the "good enough" line, and most tasks get diverted away from the premium tier.</div>
+        <div class="verdict-point">Token Optimization repeats the 2022–2024 Cloud Optimization script — the bulls then also said "they'll spend more after optimization," and the result was four consecutive decelerating quarters.</div>
+      </div>
+      <div class="verdict-cell bull">
+        <div class="verdict-label">Bull case · Two points</div>
+        <div class="verdict-point">Jevons Paradox — cheaper means a bigger market. In Factory's founder's words: <em>"this cake has rocket boosters strapped to its sides."</em></div>
+        <div class="verdict-point">China is compute-short, open models constrained by chip supply, so near-term they can't carry the traffic they want.</div>
+      </div>
+    </div>
+
+    <p>I lean Bull myself. But a thesis has to be falsifiable, so for the next two quarters I'm watching four things:</p>
+
+    <div class="watch-list">
+      <div class="watch-label">The four signals</div>
+      <div class="watch-row">
+        <div class="watch-num">01</div>
+        <div class="watch-text"><strong>Anthropic and OpenAI revenue signals.</strong> If H1 growth did include "most expensive model doing grunt work" bloat, it should show up first in the sequential curve. Third-party data trackers are already circulating on X — Anthropic's ARR is still at all-time highs, but the slope is bending; the same tracker shows OpenAI actually accelerating. That curve argument is arriving faster than I expected.</div>
+      </div>
+      <div class="watch-row">
+        <div class="watch-num">02</div>
+        <div class="watch-text"><strong>Chinese model availability.</strong> Can they move from Together/Fireworks to large-scale stable supply on public clouds? That's the precondition for moving from token share to revenue share.</div>
+      </div>
+      <div class="watch-row">
+        <div class="watch-num">03</div>
+        <div class="watch-text"><strong>Direction of the quality gap.</strong> More than benchmarks, I trust builder retry rates.</div>
+      </div>
+      <div class="watch-row">
+        <div class="watch-num">04</div>
+        <div class="watch-text"><strong>Whether "fully loaded cost" becomes procurement language.</strong> If it does, a lot of "5x cheaper" narratives based on list prices need to be recalculated.</div>
+      </div>
+    </div>
+
+    <p>AI's competition isn't over — the competition function has changed.</p>
+
+    <div class="pullquote">
+      <p>What we optimized was Intelligence. What we'll optimize is Intelligence per Dollar.</p>
+    </div>
+
+    <p>Twelve months from now, we come back for the answer.</p>
+
+    <div class="attr-note">
+      Originally published in Chinese on 硅谷非共识 (Silicon Valley Non-Consensus), July 2026. This English edition preserves the field research — company names, numbers, and quotes — verbatim.
+    </div>
+  </section>
+
+</div>
+
+<div class="back-nav">
+  <a href="index.html">← Back to home</a>
+  <a href="founders_join_labs.html">中文系列 · Chinese essays →</a>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) el.target.classList.add('visible');
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

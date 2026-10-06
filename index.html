@@ -481,6 +481,55 @@
   .wave-dot.w2 { color: var(--wave2); border-color: var(--wave2); }
   .wave-dot.w3 { color: var(--wave3); border-color: var(--wave3); }
 
+  /* ── SELECTED INVESTMENTS ── */
+  .investments-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--rule);
+    margin-top: 36px;
+  }
+
+  .investment-card {
+    background: var(--bg);
+    padding: 36px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .inv-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .inv-layer {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .inv-desc {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-light);
+    margin-top: 4px;
+  }
+
+  .investments-note {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-light);
+    margin-top: 24px;
+    line-height: 1.65;
+    letter-spacing: 0.03em;
+  }
+
   /* ── WRITING FOCUS ── */
   .focus-list {
     display: grid;
@@ -600,7 +649,7 @@
     .hero { grid-template-columns: 1fr; padding: 56px 24px 48px; gap: 48px; }
     .hero-right { display: none; }
     .section-wrap { padding: 48px 24px; }
-    .edge-grid, .focus-list { grid-template-columns: 1fr; }
+    .edge-grid, .focus-list, .investments-grid { grid-template-columns: 1fr; }
     .essays-grid { grid-template-columns: 1fr; }
     .essay-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
     .essay-wave-indicator { display: none; }
@@ -617,7 +666,8 @@
   <div class="nav-logo">Christina Xu</div>
   <div class="nav-links">
     <a href="#about">About</a>
-    <a href="#writing">Writing</a>
+    <a href="#investments">Investments</a>
+    <a href="#writing">Research</a>
     <a href="#speaking">Speaking</a>
     <a href="#connect">Contact</a>
   </div>
@@ -695,31 +745,68 @@
   </div>
 </div>
 
+<!-- SELECTED INVESTMENTS -->
+<div class="section-wrap fade-in" id="investments">
+  <div class="section-header">Selected Investments</div>
+  <h2>AI infrastructure, inside the stack</h2>
+
+  <div class="investments-grid">
+    <div class="investment-card">
+      <div class="inv-layer">Foundation Models</div>
+      <div class="inv-name">Anthropic</div>
+      <div class="inv-desc">Frontier research lab building Claude. Core position in the premium tier of the model dumbbell — the "value" half of the 90/10 split.</div>
+    </div>
+    <div class="investment-card">
+      <div class="inv-layer">Neocloud</div>
+      <div class="inv-name">Nebius</div>
+      <div class="inv-desc">GPU-native cloud infrastructure. European-listed pure-play on inference capacity, sovereign AI compute, and the shift from training to inference economics.</div>
+    </div>
+    <div class="investment-card">
+      <div class="inv-layer">Data + AI Platform</div>
+      <div class="inv-name">Databricks</div>
+      <div class="inv-desc">Enterprise-scale data lakehouse becoming the default substrate for proprietary model fine-tuning, model routing, and the AI data stack.</div>
+    </div>
+  </div>
+
+  <p class="investments-note">AI infrastructure positions held by my team at Franchise Capital. Selected names from the current portfolio across compute, neocloud, foundation models, and the AI data layer.</p>
+</div>
+
 <!-- WRITING -->
 <div class="section-wrap fade-in" id="writing">
-  <div class="section-header">Writing</div>
-  <h2>On AI infrastructure economics</h2>
+  <div class="section-header">Research</div>
+  <h2>A multi-essay framework for AI infrastructure value capture</h2>
 
   <div class="essays-grid">
-    <!-- Featured -->
-    <a href="ai_wealth_waves_1.html" class="essay-card featured">
+    <!-- Essay 005 — Featured (newest field research) -->
+    <a href="open_vs_closed.html" class="essay-card featured">
       <div>
         <div class="essay-meta">
-          <span class="essay-tag new">Featured</span>
+          <span class="essay-tag new">Featured · July 2026</span>
           <span>12 min read</span>
         </div>
-        <div class="essay-title">Where Is the Next Wave of AI Wealth?</div>
-        <p class="essay-excerpt">A 100-year pattern has governed every major information industry — telegraph, telephone, mobile data. Each time, wealth flows in three waves: infrastructure first, then compression, then gatekeepers. AI is running the same script. The question is which wave you're positioned for.</p>
-        <div class="essay-read">Read the essay</div>
+        <div class="essay-title">After 15 Silicon Valley AI Companies, I'm Rethinking Open vs. Closed</div>
+        <p class="essay-excerpt">Based on a closed-door session in Menlo Park with Cursor, Fireworks, Cognition, Sierra and a dozen other AI-native companies. From Token Optimization to Model Routing — why AI's competition is shifting from Capability to Economics, and what it means across Frontier Labs, semis, cloud, and AI software.</p>
+        <div class="essay-read">Read the research</div>
       </div>
       <div class="essay-wave-indicator">
-        <span class="wave-dot w1">Wave 1</span>
-        <span class="wave-dot w2">Wave 2</span>
-        <span class="wave-dot w3">Wave 3</span>
+        <span class="wave-dot w1">Field</span>
+        <span class="wave-dot w2">Research</span>
       </div>
     </a>
 
-    <!-- Essay 002 -->
+    <!-- Essay 001 — Thesis framework -->
+    <a href="ai_wealth_waves_1.html" class="essay-card">
+      <div>
+        <div class="essay-meta">
+          <span>12 min read</span>
+        </div>
+        <div class="essay-title">Where Is the Next Wave of AI Wealth?</div>
+        <p class="essay-excerpt">A 100-year pattern has governed every major information industry. Wealth flows in three waves: infrastructure first, then compression, then gatekeepers. AI is running the same script.</p>
+        <div class="essay-read">Read the essay</div>
+      </div>
+    </a>
+
+    <!-- Essay 002 — Thesis framework -->
     <a href="value_frameworks.html" class="essay-card">
       <div>
         <div class="essay-meta">
@@ -731,7 +818,7 @@
       </div>
     </a>
 
-    <!-- Essay 004 -->
+    <!-- Essay 004 — Operator essay -->
     <a href="collapse_isnt_gradual.html" class="essay-card">
       <div>
         <div class="essay-meta">
@@ -743,8 +830,8 @@
       </div>
     </a>
 
-    <!-- Essay 003 (Chinese) -->
-    <a href="founders_join_labs.html" class="essay-card wide">
+    <!-- Essay 003 — Chinese -->
+    <a href="founders_join_labs.html" class="essay-card">
       <div>
         <div class="essay-meta">
           <span class="essay-tag zh">中文 · CN</span>

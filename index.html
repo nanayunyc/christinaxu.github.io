@@ -500,7 +500,7 @@
 
   .inv-name {
     font-family: 'Playfair Display', serif;
-    font-size: 32px;
+    font-size: 38px;
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.1;
@@ -514,20 +514,15 @@
     color: var(--accent);
   }
 
-  .inv-desc {
-    font-size: 14px;
-    line-height: 1.55;
+  .investment-card.secondary .inv-name {
+    font-size: 28px;
     color: var(--ink-light);
-    margin-top: 4px;
+    font-weight: 400;
   }
 
-  .investments-note {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
+  .investment-card.secondary .inv-layer {
     color: var(--ink-light);
-    margin-top: 24px;
-    line-height: 1.65;
-    letter-spacing: 0.03em;
+    opacity: 0.75;
   }
 
   /* ── WRITING FOCUS ── */
@@ -752,23 +747,18 @@
 
   <div class="investments-grid">
     <div class="investment-card">
-      <div class="inv-layer">Foundation Models</div>
-      <div class="inv-name">Anthropic</div>
-      <div class="inv-desc">Frontier research lab building Claude. Core position in the premium tier of the model dumbbell — the "value" half of the 90/10 split.</div>
-    </div>
-    <div class="investment-card">
-      <div class="inv-layer">Neocloud</div>
+      <div class="inv-layer">Neocloud · Inference</div>
       <div class="inv-name">Nebius</div>
-      <div class="inv-desc">GPU-native cloud infrastructure. European-listed pure-play on inference capacity, sovereign AI compute, and the shift from training to inference economics.</div>
     </div>
     <div class="investment-card">
       <div class="inv-layer">Data + AI Platform</div>
       <div class="inv-name">Databricks</div>
-      <div class="inv-desc">Enterprise-scale data lakehouse becoming the default substrate for proprietary model fine-tuning, model routing, and the AI data stack.</div>
+    </div>
+    <div class="investment-card secondary">
+      <div class="inv-layer">Foundation Models</div>
+      <div class="inv-name">Anthropic</div>
     </div>
   </div>
-
-  <p class="investments-note">AI infrastructure positions held by my team at Franchise Capital. Selected names from the current portfolio across compute, neocloud, foundation models, and the AI data layer.</p>
 </div>
 
 <!-- WRITING -->
@@ -784,8 +774,8 @@
           <span class="essay-tag new">Featured · July 2026</span>
           <span>12 min read</span>
         </div>
-        <div class="essay-title">After 15 Silicon Valley AI Companies, I'm Rethinking Open vs. Closed</div>
-        <p class="essay-excerpt">Based on a closed-door session in Menlo Park with Cursor, Fireworks, Cognition, Sierra and a dozen other AI-native companies. From Token Optimization to Model Routing — why AI's competition is shifting from Capability to Economics, and what it means across Frontier Labs, semis, cloud, and AI software.</p>
+        <div class="essay-title">After Talking to 15 Silicon Valley AI Companies, I See the Open vs. Closed Debate Differently</div>
+        <p class="essay-excerpt">Two days in Menlo Park with Cursor, Fireworks, Cognition, Sierra and a dozen other AI-native companies. From Token Optimization to Model Routing — why AI's competition is shifting from Capability to Economics, and what it means across Frontier Labs, semis, cloud, and AI software.</p>
         <div class="essay-read">Read the research</div>
       </div>
       <div class="essay-wave-indicator">
